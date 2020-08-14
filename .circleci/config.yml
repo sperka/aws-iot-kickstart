@@ -5,9 +5,6 @@ jobs:
       Job for generating a release, along with corresponding git tags, for a
       Lerna-based mono-repository.
       https://circleci.com/orbs/registry/orb/hutson/library-release-workflows
-    filters:
-      branches:
-        only: prerelease/beta
     docker:
       - image: >-
           node:10.15.0@sha256:cdca9751c481ae77f2f57bf8a7337c378a144af45310f7d2711d265f5ac9ef15
@@ -25,9 +22,6 @@ jobs:
       Job for publishing multiple npm packages from a Lerna-based mono-repository to
       an npm-compatible package registry.
       https://circleci.com/orbs/registry/orb/hutson/library-release-workflows
-    filters:
-      branches:
-        only: prerelease/beta
     docker:
       - image: >-
           node:10.15.0@sha256:cdca9751c481ae77f2f57bf8a7337c378a144af45310f7d2711d265f5ac9ef15
@@ -41,6 +35,14 @@ workflows:
   version: 2
   build:
     jobs:
-      - delivery
-      - deploy
+      - delivery:
+        filters:
+          branches:
+            only: prerelease/beta
+      - deploy:
+        requires:
+          - delivery
+        filters:
+          branches:
+            only: prerelease/beta
     
