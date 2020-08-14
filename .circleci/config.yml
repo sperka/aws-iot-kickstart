@@ -36,13 +36,13 @@ workflows:
   build:
     jobs:
       - delivery:
-        filters:
-          branches:
-            only: prerelease/beta
+          filters:
+            branches:
+              only: prerelease/beta
       - deploy:
-        requires:
-          - delivery
-        filters:
-          branches:
-            only: prerelease/beta
+          requires:
+            - delivery
+          filters:
+            branches:
+              only: prerelease/beta
     
