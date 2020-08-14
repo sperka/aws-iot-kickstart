@@ -41,7 +41,7 @@ workflows:
               only: prerelease/beta
       - deploy:
           requires:
-            - delivery
+            - deliver
           filters:
             branches:
               only: prerelease/beta
